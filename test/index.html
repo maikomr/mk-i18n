@@ -1,0 +1,27 @@
+<html>
+<head>
+	<title>Test i18n</title>
+	<link rel="import" href="../bower_components/polymer/polymer.html">
+	<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+	<link rel="import" href="../mk-i18n.html">
+	<link rel="import" href="my-element.html">
+</head>
+<body>
+	<template is="dom-bind">
+		
+		<mk-i18n language="{{language}}"></mk-i18n>
+		
+		<my-element></my-element>
+
+		<paper-menu attr-for-selected="lang" selected="{{language}}">
+			<paper-item lang="en">English</paper-item>
+			<paper-item lang="es">Spanish</paper-item>
+			<paper-item lang="fr">French</paper-item>
+		</paper-menu>
+
+	</template>
+
+	<script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+	
+</body>
+</html>

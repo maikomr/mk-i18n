@@ -1,0 +1,45 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<dom-module id="mk-i18n">
+</dom-module>
+
+<script>
+  window.i18n = window.i18n || {
+    language: 'en',
+    locales: {
+      en : {
+        gretting :'Hello'
+      },
+      es : {
+        gretting:'Hola'
+      },
+      fr: {
+        gretting:'Bonjour'
+      }
+    },
+    notify: function() {
+      console.log('notifying change');
+      for (var i = this.observers.length - 1; i >= 0; i--) {
+        this.observers[i]();
+      }
+    },
+    observers: []
+  };
+
+  Polymer({
+    is: 'mk-i18n',
+    properties: {
+      language: {
+        type: String,
+        value: 'en',
+        notify: true,
+        observer: '_languageChanged'
+      }
+    },
+    _languageChanged: function(value) {
+      window.i18n.language = value;
+      console.log('Firing i18n-language-ready event from mk-i18n.');
+      window.i18n.notify();
+    }
+  });
+</script>

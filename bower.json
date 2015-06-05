@@ -1,0 +1,17 @@
+{
+  "name": "mk-i18n",
+  "version": "0.0.0",
+  "homepage": "https://github.com/maikomr/mk-i18n",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.0.0",
+    "paper-menu": "PolymerElements/paper-menu#1.0.0"
+  }
+}
