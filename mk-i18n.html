@@ -39,23 +39,28 @@
       localesDirectory: {
         type: String,
         value: 'locales'
+      },
+      loadedLocales: {
+        type: Array,
+        value: new Array()
       }
     },
     _languageChanged: function(value) {
-      window.i18n.language = value;      
-      // TODO generate the request only if
-      // the requested language is not loaded
-      this.url = this.localesDirectory + '/' + value + '.json';
-      this.$.ajax.generateRequest();
-      
-      // TODO handle this within an if-else statement
-      // console.log('Firing i18n-language-ready event from mk-i18n.');
-      // window.i18n.notify();
+      window.i18n.language = value;
+      if(this.loadedLocales != undefined && 
+        (this.loadedLocales.indexOf(value) in this.loadedLocales)) {
+        console.log('Language "' + value + '" has already been requested.');
+        window.i18n.notify();
+      }
+      else {
+        console.log('Language "' + value + '" will be tracked.');
+        this.url = this.localesDirectory + '/' + value + '.json';
+        this.$.ajax.generateRequest();
+      }
     },
     handleResponse: function(e) {
-      console.log(e.detail.response);
+      this.loadedLocales.push(this.language);
       window.i18n.locales[this.language] = e.detail.response;
-      console.log('Firing i18n-language-ready event from mk-i18n.');
       window.i18n.notify();
     }
   });
