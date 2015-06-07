@@ -1,22 +1,17 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="mk-i18n">
+  <template>
+    <iron-ajax id="ajax" url="{{url}}" handle-as="json" on-response="handleResponse">
+    </iron-ajax>
+  </template>  
 </dom-module>
 
 <script>
   window.i18n = window.i18n || {
     language: 'en',
-    locales: {
-      en : {
-        gretting :'Hello'
-      },
-      es : {
-        gretting:'Hola'
-      },
-      fr: {
-        gretting:'Bonjour'
-      }
-    },
+    locales: {},
     get: function(key) {
       return this.locales[this.language][key];
     },
@@ -37,10 +32,29 @@
         value: 'en',
         notify: true,
         observer: '_languageChanged'
+      },
+      url: {
+        type: String
+      },
+      localesDirectory: {
+        type: String,
+        value: 'locales'
       }
     },
     _languageChanged: function(value) {
-      window.i18n.language = value;
+      window.i18n.language = value;      
+      // TODO generate the request only if
+      // the requested language is not loaded
+      this.url = this.localesDirectory + '/' + value + '.json';
+      this.$.ajax.generateRequest();
+      
+      // TODO handle this within an if-else statement
+      // console.log('Firing i18n-language-ready event from mk-i18n.');
+      // window.i18n.notify();
+    },
+    handleResponse: function(e) {
+      console.log(e.detail.response);
+      window.i18n.locales[this.language] = e.detail.response;
       console.log('Firing i18n-language-ready event from mk-i18n.');
       window.i18n.notify();
     }
