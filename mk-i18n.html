@@ -47,8 +47,7 @@
     },
     _languageChanged: function(value) {
       window.i18n.language = value;
-      if(this.loadedLocales != undefined && 
-        (this.loadedLocales.indexOf(value) in this.loadedLocales)) {
+      if(this.loadedLocales.indexOf(value) in this.loadedLocales) {
         console.log('Language "' + value + '" has already been requested.');
         window.i18n.notify();
       }
