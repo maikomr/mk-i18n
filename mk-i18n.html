@@ -1,66 +1,31 @@
-<link rel="import" href="bower_components/polymer/polymer.html">
-<link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 
 <dom-module id="mk-i18n">
+  
   <template>
-    <iron-ajax id="ajax" url="{{url}}" handle-as="json" on-response="handleResponse">
-    </iron-ajax>
-  </template>  
+  	<content></content>
+  </template>
+
 </dom-module>
 
 <script>
-  window.i18n = window.i18n || {
-    language: 'en',
-    locales: {},
-    get: function(key) {
-      return this.locales[this.language][key];
-    },
-    notify: function() {
-      console.log('notifying change');
-      for (var i = this.observers.length - 1; i >= 0; i--) {
-        this.observers[i]();
-      }
-    },
-    observers: []
-  };
-
   Polymer({
-    is: 'mk-i18n',
+    
+    is: "mk-i18n",
+    
     properties: {
-      language: {
-        type: String,
-        value: 'en',
-        notify: true,
-        observer: '_languageChanged'
-      },
-      url: {
-        type: String
-      },
-      localesDirectory: {
-        type: String,
-        value: 'locales'
-      },
-      loadedLocales: {
-        type: Array,
-        value: new Array()
-      }
+      key: String,
+      fallback: String
     },
-    _languageChanged: function(value) {
-      window.i18n.language = value;
-      if(this.loadedLocales.indexOf(value) in this.loadedLocales) {
-        console.log('Language "' + value + '" has already been requested.');
-        window.i18n.notify();
-      }
-      else {
-        console.log('Language "' + value + '" will be tracked.');
-        this.url = this.localesDirectory + '/' + value + '.json';
-        this.$.ajax.generateRequest();
-      }
+
+    refresh : function() {
+    	var message = window.i18n.get(this.key);
+    	this.innerText = message || this.fallback;
     },
-    handleResponse: function(e) {
-      this.loadedLocales.push(this.language);
-      window.i18n.locales[this.language] = e.detail.response;
-      window.i18n.notify();
+    
+    ready: function() {
+    	window.i18n.observers.push(this);
     }
+    
   });
 </script>

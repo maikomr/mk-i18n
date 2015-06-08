@@ -4,15 +4,15 @@
 	<meta charset="utf-8">
 	<title>Test i18n</title>
 	<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+	<link rel="import" href="../mk-i18n-config.html">
 	<link rel="import" href="../mk-i18n.html">
-	<link rel="import" href="my-element.html">
 </head>
 <body>
 	<template is="dom-bind">
 		
-		<mk-i18n language="{{language}}"></mk-i18n>
+		<mk-i18n-config language="{{language}}"></mk-i18n-config>
 		
-		<my-element></my-element>
+		<h1><mk-i18n key="gretting" fallback="Gretting"></mk-i18n></h1>
 
 		<paper-menu attr-for-selected="lang" selected="{{language}}">
 			<paper-item lang="en">English</paper-item>
@@ -23,6 +23,5 @@
 	</template>
 
 	<script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-	
 </body>
 </html>
