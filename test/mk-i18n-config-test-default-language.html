@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charse="utf-8">
+	<script src="../bower-components/webcomponentsjs/webcomponent.min.js"></script>
+	<script src="../bower-components/web-component-tester/browser.js"></script>
+	<link rel="import" href="../mk-i18n-config.html">
+</head>
+<body>
+	<mk-i18n-config id="element"></mk-i18n-config>
+	<script>
+		suite('mk-i18n-config', function(){
+			
+			var browserLanguage = navigator.language || navigator.userLanguage;
+
+			test('default language is browser language', function(){
+				document.addEventListener("DOMContentLoaded", function(event) { 
+				  assert.equal(document.getElementById('element').language, browserLanguage);
+				});
+			});
+
+			test('default element language is also i18n language', function(){
+				document.addEventListener("DOMContentLoaded", function(event) { 
+				  assert.equal(document.getElementById('element').language, window.i18n.language);
+				});
+			});
+
+			test('a default locale is loaded', function(){
+				document.addEventListener("DOMContentLoaded", function(event) { 
+				  assert.property(window.i18n.locales, browserLanguage);
+				  assert.isTrue(Object.keys(window.i18n.locales).length === 1);
+				});
+			});
+
+			test('when a language does not match any language in locales should load one by default', function(){
+				document.addEventListener("DOMContentLoaded", function(event) {
+					document.getElementById('element').language = "bh";
+				  assert.defined(window.i18n.locales);
+				  assert.equal(window.i18n.language, 'en');
+				});
+			});
+
+		});
+	</script>
+</body>
+</html>
