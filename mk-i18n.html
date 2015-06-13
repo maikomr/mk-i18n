@@ -8,7 +8,9 @@
 
 </dom-module>
 
+
 <script>
+(function(){
   Polymer({
     
     is: "mk-i18n",
@@ -19,13 +21,13 @@
     },
 
     refresh : function() {
-    	var message = window.i18n.get(this.key);
+    	var message = mki18n.get(this.key);
     	this.innerText = message || this.fallback;
     },
     
     ready: function() {
-    	window.i18n.observers.push(this);
+    	mki18n.addObserver(this);
     }
-    
   });
+})();
 </script>

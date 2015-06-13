@@ -1,73 +1,37 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
-<link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="mk-i18n-config">
   <template>
-    <iron-ajax id="ajax" url="{{url}}" handle-as="json" on-response="handleResponse" on-error="handleError">
-    </iron-ajax>
+    
   </template>  
 </dom-module>
-
+<script type="text/javascript" src="js/i18next-1.9.0.js"></script>
+<script type="text/javascript" src="js/mk-i18n.js"></script>
 <script>
-  window.i18n = window.i18n || {
-    language: 'en',
-    locales: {},
-    get: function(key) {
-      return this.locales[this.language][key];
-    },
-    notify: function() {
-      console.log('notifying change');
-      for (var i = this.observers.length - 1; i >= 0; i--) {
-        this.observers[i].refresh();
-      }
-    },
-    observers: []
-  };
-
-  var mki18n = Polymer({
-    is: 'mk-i18n-config',
-    properties: {
-      language: {
-        type: String,
-        notify: true,
-        observer: '_languageChanged'
+(function(){
+  Polymer({
+      is: 'mk-i18n-config',
+      properties: {
+        language: {
+          type: String,
+          notify: true,
+          observer: '_languageChanged'
+        }
       },
-      url: {
-        type: String,
+      _languageChanged: function(value) {
+        console.log('Change lang ' + value);
+        
+        i18n.setLng(value, function(t) {
+          mki18n.notify();
+        });
       },
-      localesDirectory: {
-        type: String,
-        value: 'locales'
-      },
-      loadedLocales: {
-        type: Array,
-        value: new Array()
+      ready: function() {
+        this.language = this.language || navigator.language || navigator.userLanguage;
+        i18n.init({
+          lang: this.language,
+          fallbackLng: 'en'
+        });
       }
-    },
-    _languageChanged: function(value) {
-      window.i18n.language = value;
-      if(this.loadedLocales.indexOf(value) in this.loadedLocales) {
-        window.i18n.notify();
-      }
-      else {
-        this.url = this.localesDirectory + '/' + value + '.json';
-        this.$.ajax.generateRequest();
-      }
-    },
-    handleResponse: function(e, detail) {
-      if(detail.succeeded) {
-        this.loadedLocales.push(this.language);
-        window.i18n.locales[this.language] = detail.response;
-        window.i18n.notify();
-      }
-    },
-    handleError: function(e, detail) {
-      var status = detail.request.xhr.status;
-      if(status == 404)
-        this.language = 'en';
-    },
-    ready: function() {
-      this.language = navigator.language || navigator.userLanguage;
-    }
-  });
+    });
+})();
 </script>

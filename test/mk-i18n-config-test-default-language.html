@@ -2,45 +2,68 @@
 <html>
 <head>
 	<meta charse="utf-8">
-	<script src="../bower-components/webcomponentsjs/webcomponent.min.js"></script>
-	<script src="../bower-components/web-component-tester/browser.js"></script>
+	<script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+	<script src="../bower_components/web-component-tester/browser.js"></script>
 	<link rel="import" href="../mk-i18n-config.html">
 </head>
 <body>
 	<mk-i18n-config id="element"></mk-i18n-config>
 	<script>
+    var browserLanguage = navigator.language || navigator.userLanguage;
+		var element = document.getElementById("element");
+
 		suite('mk-i18n-config', function(){
 			
-			var browserLanguage = navigator.language || navigator.userLanguage;
-
-			test('default language is browser language', function(){
-				document.addEventListener("DOMContentLoaded", function(event) { 
-				  assert.equal(document.getElementById('element').language, browserLanguage);
-				});
+			test('when not specified, default language is browser language', function(){
+				assert.equal(element.language, browserLanguage);
 			});
 
-			test('default element language is also i18n language', function(){
-				document.addEventListener("DOMContentLoaded", function(event) { 
-				  assert.equal(document.getElementById('element').language, window.i18n.language);
-				});
+			test('when not specified, default language is reflected to i18n', function(){
+				assert.equal(element.language, i18n.lng());
+				assert.equal(i18n.lng(), 'en-US');
 			});
 
-			test('a default locale is loaded', function(){
-				document.addEventListener("DOMContentLoaded", function(event) { 
-				  assert.property(window.i18n.locales, browserLanguage);
-				  assert.isTrue(Object.keys(window.i18n.locales).length === 1);
+			test('when specified, element language is reflected to i18n', function(done){
+				
+				var semaphore = {
+					refresh: function() {
+							done();
+					}
+				};
+        
+        // add semaphore as observer
+        mki18n.addObserver(semaphore);
+				
+				// wait until everything is done
+				flush(function(){
+					
+
+	        // change language
+					element.language = 'es';
 				});
+
+				// call the assert
+				assert.equal(i18n.lng(), 'es');
+
 			});
 
-			test('when a language does not match any language in locales should load one by default', function(){
-				document.addEventListener("DOMContentLoaded", function(event) {
-					document.getElementById('element').language = "bh";
-				  assert.defined(window.i18n.locales);
-				  assert.equal(window.i18n.language, 'en');
-				});
-			});
+			// test('when specified but not available, i18n should fall back to default', function(done){
+			// 	flush(function(){
+			// 		element.language = 'bh';
+			// 		done();
+			// 	});
+					
+			// 	assert.equal(i18n.lng(), 'en');
+			// });
 
+			// test.only('when specified but not available, element language should also fall back', function(done){
+			// 	flush(function() {
+			// 		element.language = 'bh';
+			// 		done(); // language remains default en-US (browser) before being compared to 'en'
+			// 	});
+			// 	assert.equal(element.language, 'en');
+			// });
 		});
-	</script>
+</script>
 </body>
 </html>
