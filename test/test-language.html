@@ -20,7 +20,7 @@
 				assert.equal('es', i18nLang);
 			});			
 
-			test('when specified should reflect in i18n', function(done){
+			test('i18n should translate given language', function(done){
 				var message = i18n.t('gretting');
 				flush(done);
 				assert.equal('Hola', message);

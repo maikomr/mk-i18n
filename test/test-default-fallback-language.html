@@ -14,6 +14,11 @@
 
 		suite('when fallback language is not given', function(){
 			
+			test('default fallback is dev', function(done){
+				flush(done);
+				assert.equal('dev', element.fallbackLng);
+			});
+
 			test('i18n should return translation from default fallback language', function(done){
 				var fallbackMessage = i18n.t('gretting');
 				flush(done);

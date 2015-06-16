@@ -14,10 +14,15 @@
       properties: {
         lng: {
           type: String,
+          value: navigator.language || navigator.userLanguage,
           notify: true,
           observer: '_languageChanged'
         },
-        fallbackLng: String
+        fallbackLng: {
+          type: String,
+          value: 'dev',
+          notify: true
+        }
       },
       _languageChanged: function(value) {
         if(!this.fallbackLng) return; // dom is not loaded completely
@@ -28,7 +33,7 @@
       ready: function() {
         i18n.init({
           lng: this.lng || navigator.language || navigator.userLanguage,
-          fallbackLng: this.fallbackLng || 'dev'
+          fallbackLng: this.fallbackLng || 'dev',
         }, function(t){
           mki18n.notify();
         });
