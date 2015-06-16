@@ -33,7 +33,7 @@
       ready: function() {
         i18n.init({
           lng: this.lng || navigator.language || navigator.userLanguage,
-          fallbackLng: this.fallbackLng || 'dev',
+          fallbackLng: this.fallbackLng || 'dev'
         }, function(t){
           mki18n.notify();
         });
