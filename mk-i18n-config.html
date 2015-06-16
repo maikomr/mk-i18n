@@ -12,24 +12,25 @@
   Polymer({
       is: 'mk-i18n-config',
       properties: {
-        language: {
+        lng: {
           type: String,
           notify: true,
           observer: '_languageChanged'
-        }
+        },
+        fallbackLng: String
       },
       _languageChanged: function(value) {
-        console.log('Change lang ' + value);
-        
-        i18n.setLng(value, function(t) {
+        if(!this.fallbackLng) return; // dom is not loaded completely
+        i18n.setLng(this.lng, function(t){
           mki18n.notify();
         });
       },
       ready: function() {
-        this.language = this.language || navigator.language || navigator.userLanguage;
         i18n.init({
-          lang: this.language,
-          fallbackLng: 'en'
+          lng: this.lng || navigator.language || navigator.userLanguage,
+          fallbackLng: this.fallbackLng || 'dev'
+        }, function(t){
+          mki18n.notify();
         });
       }
     });

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charse="utf-8">
+	<script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+	<script src="../bower_components/web-component-tester/browser.js"></script>
+	<link rel="import" href="../mk-i18n-config.html">
+</head>
+<body>
+	<mk-i18n-config id="element" lng="ch"></mk-i18n-config>
+	<script>
+		
+		var element = document.getElementById("element");
+
+		suite('when fallback language is not given', function(){
+			
+			test('i18n should return translation from default fallback language', function(done){
+				var fallbackMessage = i18n.t('gretting');
+				flush(done);
+				assert.equal('Hello from dev fallback', fallbackMessage);
+			});
+
+		});
+</script>
+</body>
+</html>

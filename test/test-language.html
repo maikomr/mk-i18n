@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charse="utf-8">
+	<script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+	<script src="../bower_components/web-component-tester/browser.js"></script>
+	<link rel="import" href="../mk-i18n-config.html">
+</head>
+<body>
+	<mk-i18n-config id="element" lng="es"></mk-i18n-config>
+	<script>
+		
+		var element = document.getElementById("element");
+
+		suite('when language is given', function(){
+
+			test('i18n should reflect element language', function(done){
+				var i18nLang = i18n.lng();
+				flush(done);
+				assert.equal('es', i18nLang);
+			});			
+
+			test('when specified should reflect in i18n', function(done){
+				var message = i18n.t('gretting');
+				flush(done);
+				assert.equal('Hola', message);
+			});
+
+		});
+</script>
+</body>
+</html>

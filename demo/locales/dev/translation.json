@@ -4,5 +4,5 @@
 		"page1": "Page One",
 		"page2": "Page Two"
 	},
-	"gretting": "Hello from en"
+	"gretting": "Hello from fallback"
 }

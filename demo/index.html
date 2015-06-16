@@ -5,14 +5,14 @@
 	<title>Test i18n</title>
 	<link rel="import" href="../mk-i18n-config.html">
 	<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
-	<link rel="import" href="../mk-i18n.html">
+	<link rel="import" href="my-element.html">
 </head>
 <body>
 	<template is="dom-bind">
 		
-		<mk-i18n-config language="{{language}}"></mk-i18n-config>
+		<mk-i18n-config lng="{{language}}" fallback-lng="en"></mk-i18n-config>
 
-		<h1><mk-i18n key="gretting"></mk-i18n></h1>
+		<my-element></my-element>
 
 		<paper-menu attr-for-selected="lang" selected="{{language}}">
 			<paper-item lang="en">English</paper-item>
