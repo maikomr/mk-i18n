@@ -2,21 +2,23 @@
 <html>
 <head>
 	<meta charse="utf-8">
-	<script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-	<script src="../bower_components/web-component-tester/browser.js"></script>
 	<link rel="import" href="../mk-i18n-config.html">
+	<link rel="import" href="../mk-i18n.html">
 </head>
 <body>
-	<mk-i18n-config id="element" lng="ch" fallback-lng="en"></mk-i18n-config>
+	<mk-i18n-config id="config" lng="ch" fallback-lng="en"></mk-i18n-config>
+	<mk-i18n id="element" key="gretting"></mk-i18n>
+	<script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+	<script src="../bower_components/web-component-tester/browser.js"></script>
 	<script>
 		
+		var config = document.getElementById("config");
 		var element = document.getElementById("element");
 
 		suite('when fallback language is given', function(){
 
-			test('i18n should return translation from given fallback language', function(done){
-				var fallbackMessage = i18n.t('gretting');
-				flush(done);
+			test('i18n should return translation from given fallback language', function(){
+				var fallbackMessage = element.innerText;
 				assert.equal('Hello from en', fallbackMessage);
 			});
 

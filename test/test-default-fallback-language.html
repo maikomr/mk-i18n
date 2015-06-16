@@ -2,26 +2,27 @@
 <html>
 <head>
 	<meta charse="utf-8">
-	<script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-	<script src="../bower_components/web-component-tester/browser.js"></script>
 	<link rel="import" href="../mk-i18n-config.html">
+	<link rel="import" href="../mk-i18n.html">
 </head>
 <body>
-	<mk-i18n-config id="element" lng="ch"></mk-i18n-config>
+	<mk-i18n-config id="config" lng="ch"></mk-i18n-config>
+	<mk-i18n id="element" key="gretting"></mk-i18n>
+	<script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+	<script src="../bower_components/web-component-tester/browser.js"></script>
 	<script>
 		
+		var config = document.getElementById("config");
 		var element = document.getElementById("element");
 
 		suite('when fallback language is not given', function(){
 			
-			test('default fallback is dev', function(done){
-				flush(done);
-				assert.equal('dev', element.fallbackLng);
+			test('default fallback is dev', function(){
+				assert.equal('dev', config.fallbackLng);
 			});
 
-			test('i18n should return translation from default fallback language', function(done){
-				var fallbackMessage = i18n.t('gretting');
-				flush(done);
+			test('i18n should return translation from default fallback language', function(){
+				var fallbackMessage = element.innerText;
 				assert.equal('Hello from dev fallback', fallbackMessage);
 			});
 
