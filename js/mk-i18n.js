@@ -1,5 +1,7 @@
 (function(){
-	window.mki18n = (function() {
+	window.Polymer = window.Polymer || {};
+
+	window.Polymer.mki18n = (function() {
 	  var observers = new Array();
 
 	  return { // public interface
@@ -7,13 +9,13 @@
 	      observers.push(obj);
 	    },
 	    notify: function () {
-	      for (var i = observers.length - 1; i >= 0; i--) {
+	      for (var i = 0; i < observers.length; i++) {
 	        observers[i].refresh();
 	      }
 	    },
 	    get: function(key) {
-				return i18n.t(key);
-			}
+			return i18n.t(key);
+		}
 	  };
 	})();
 })();

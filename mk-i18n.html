@@ -10,7 +10,6 @@
 
 
 <script>
-(function(){
   Polymer({
     
     is: "mk-i18n",
@@ -21,13 +20,12 @@
     },
 
     refresh : function() {
-    	var message = mki18n.get(this.key);
+    	var message = Polymer.mki18n.get(this.key);
     	this.innerText = message || this.fallback;
     },
     
     ready: function() {
-    	mki18n.addObserver(this);
+    	Polymer.mki18n.addObserver(this);
     }
   });
-})();
 </script>
