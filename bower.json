@@ -22,8 +22,7 @@
     "/demo/"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#1.0.0",
-    "paper-menu": "PolymerElements/paper-menu#1.0.0"
+    "polymer": "Polymer/polymer#1.0.0"
   },
   "devDependencies": {
     "web-component-tester": "*"
