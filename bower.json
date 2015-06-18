@@ -1,14 +1,25 @@
 {
   "name": "mk-i18n",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "authors": [
+    "Maiko Morales <maiko.moralesr@gmail.com>"
+  ],
+  "description": "Internationalization element that uses i18next library",
   "homepage": "https://github.com/maikomr/mk-i18n",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "internationalization",
+    "locale",
+    "i18n"
+  ],
+  "main": "mk-i18n.html",
   "license": "MIT",
   "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "/.*",
+    "/test/",
+    "/demo/"
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#1.0.0",
