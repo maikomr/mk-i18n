@@ -8,8 +8,8 @@
 <body>
 	<mk-i18n-config id="config" lng="es"></mk-i18n-config>
 	<mk-i18n id="element" key="gretting"></mk-i18n>
-	<script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-	<script src="../bower_components/web-component-tester/browser.js"></script>
+	<script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+	<script src="../../web-component-tester/browser.js"></script>
 	<script>
 		
 		var config = document.getElementById("config");
@@ -26,6 +26,7 @@
 				var message = element.innerText;
 				assert.equal('Hola', message);
 			});
+			
 		});
 </script>
 </body>
