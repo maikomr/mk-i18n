@@ -10,7 +10,7 @@
 	    },
 	    notify: function () {
 	      for (var i = 0; i < observers.length; i++) {
-	        observers[i].refresh();
+	        observers[i]._refresh();
 	      }
 	    },
 	    get: function(key) {

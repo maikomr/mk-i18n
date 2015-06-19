@@ -44,7 +44,7 @@ Will display "Hola" inside a paragraph.
     /**
      * Updates message's text when mk-i18n changes its current language.
      */
-    refresh : function() {
+    _refresh : function() {
     	var message = Polymer.mki18n.get(this.key);
     	this.innerText = message || this.fallback;
     },
