@@ -28,7 +28,7 @@ Example:
         lng: {
           type: String,
           notify: true,
-          observer: '_languageChanged'
+          observer: '_lngChanged'
         },
         /**
          * Fallback language in case a given language is not found.
@@ -41,9 +41,10 @@ Example:
       },
       /**
        * i18n sets the new language and notifies all messages to update their text.
-       * @param {value} the new ISO language code.
+       *
+       * @param {string} language New ISO language code.
        */
-      _languageChanged: function(value) {
+      _lngChanged: function(language) {
         if(!this.fallbackLng) return; // dom is not loaded completely
         i18n.setLng(this.lng, function(t){
           Polymer.mki18n.notify();
