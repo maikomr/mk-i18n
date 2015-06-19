@@ -1,28 +1,48 @@
 <link rel="import" href="../polymer/polymer.html">
-
-<dom-module id="mk-i18n-config">
-  <template>
-    
-  </template>  
-</dom-module>
 <script type="text/javascript" src="js/i18next-1.9.0.js"></script>
 <script type="text/javascript" src="js/mk-i18n.js"></script>
+
+<!--
+Internationalization settings that uses <a href="http://i18next.com/">i18next</a> library 
+(You should use `<mk-i18n-config>` once in your site).
+
+The messages are loaded from "translation.json". Locales folder must be structured in this way:
+
+/locales/"language_code"/translation.json
+
+Where "language_code" is an <a href="http://www.w3schools.com/tags/ref_language_codes.asp">ISO</a> language code.
+
+Example:
+
+    <mk-i18n-config lng="en-US" fallback-lng="en"></mk-i18n-config>
+-->
+<dom-module id="mk-i18n-config">
+</dom-module>
 <script>
   Polymer({
       is: 'mk-i18n-config',
       properties: {
+        /**
+         * The current ISO language code.
+         */
         lng: {
           type: String,
-          value: navigator.language || navigator.userLanguage,
           notify: true,
           observer: '_languageChanged'
         },
+        /**
+         * Fallback language in case a given language is not found.
+         */
         fallbackLng: {
           type: String,
           value: 'dev',
           notify: true
         }
       },
+      /**
+       * i18n sets the new language and notifies all messages to update their text.
+       * @param {value} the new ISO language code.
+       */
       _languageChanged: function(value) {
         if(!this.fallbackLng) return; // dom is not loaded completely
         i18n.setLng(this.lng, function(t){
