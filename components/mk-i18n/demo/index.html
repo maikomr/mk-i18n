@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>mk-i18n demo</title>
+	<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+	<link rel="import" href="../mk-i18n-config.html">
+	<link rel="import" href="../mk-i18n.html">
+</head>
+<body>
+	<template is="dom-bind">
+		
+		<p>An example of <code>&lt;mk-i18n&gt;</code>:</p>
+		
+		<mk-i18n-config fallback-lng="en"></mk-i18n-config>
+
+		<h1> <mk-i18n key="gretting"></mk-i18n> </h1>
+  
+		<select onchange="selectLng(this.value)">
+			<option value="en">English</option>
+			<option value="fr">French</option>
+			<option value="es">Spanish</option>
+		</select>
+
+	</template>
+
+	<script type="text/javascript">
+		function selectLng(value) {
+			document.querySelector('mk-i18n-config').lng = value;
+		}
+	</script>
+
+</body>
+</html>

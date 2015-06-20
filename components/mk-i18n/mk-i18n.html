@@ -1,0 +1,56 @@
+<link rel="import" href="../polymer/polymer.html">
+<!--
+An element that displays text according to the current language set in `mk-i18n-config` element.
+
+See <a href="#mk-i18n-config">mk-i18n-config</a> for more information about
+`mk-i18n-config` and locales folder structure.
+
+Example:
+
+Given the following locale: `/locales/es/translation.json`
+    
+    {
+      "messagekey": "Hola"
+    }
+
+And `mk-i18n-config` lng property is set to "es".
+
+    <p><mk-i18n key="messagekey"></mk-i18n></p>
+
+Will display "Hola" inside a paragraph.
+
+@demo demo/index.html
+-->
+<dom-module id="mk-i18n">
+  
+  <template>
+  	<content></content>
+  </template>
+
+</dom-module>
+
+<script>
+  Polymer({
+    
+    is: "mk-i18n",
+    
+    properties: {
+      /**
+       * The key which i18n will search for in the current locale.
+       */
+      key: String
+    },
+
+    /**
+     * Updates message's text when mk-i18n changes its current language.
+     */
+    _refresh : function() {
+    	var message = Polymer.mki18n.get(this.key);
+    	this.innerText = message || this.fallback;
+    },
+    
+    ready: function() {
+    	Polymer.mki18n.addObserver(this);
+    }
+  });
+</script>

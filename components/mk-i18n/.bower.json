@@ -1,0 +1,40 @@
+{
+  "name": "mk-i18n",
+  "authors": [
+    "Maiko Morales <maiko.moralesr@gmail.com>"
+  ],
+  "description": "Internationalization element that uses i18next library",
+  "homepage": "https://github.com/maikomr/mk-i18n",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "internationalization",
+    "locale",
+    "i18n"
+  ],
+  "main": "mk-i18n.html",
+  "license": "MIT",
+  "ignore": [
+    "/.*",
+    "/test/",
+    "/demo/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.0.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  },
+  "_release": "84cc8f0448",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "84cc8f04481777a204df9fbe3a0c73cd6dfef867"
+  },
+  "_source": "git://github.com/maikomr/mk-i18n.git",
+  "_target": "master",
+  "_originalSource": "maikomr/mk-i18n",
+  "_direct": true
+}
