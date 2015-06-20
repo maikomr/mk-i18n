@@ -1,6 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
 <script type="text/javascript" src="js/i18next-1.9.0.js"></script>
-<script type="text/javascript" src="js/mk-i18n.js"></script>
 
 <!--
 Internationalization settings that uses <a href="http://i18next.com/">i18next</a> library 
@@ -10,7 +9,7 @@ The messages are loaded from "translation.json". Locales folder must be structur
 
 /locales/"language_code"/translation.json
 
-Where "language_code" is an <a href="http://www.w3schools.com/tags/ref_language_codes.asp">ISO</a> language code.
+Where "language_code" is an <a href="https://en.wikipedia.org/?title=ISO_639">ISO</a> language code.
 
 Example:
 
@@ -19,6 +18,27 @@ Example:
 <dom-module id="mk-i18n-config">
 </dom-module>
 <script>
+
+  window.Polymer = window.Polymer || {};
+
+  window.Polymer.mki18n = window.Polymer.mki18n || (function() {
+    var observers = new Array();
+
+    return { // public interface
+      addObserver: function (obj) {
+        observers.push(obj);
+      },
+      notify: function () {
+        for (var i = 0; i < observers.length; i++) {
+          observers[i]._refresh();
+        }
+      },
+      get: function(key) {
+        return i18n.t(key);
+      }
+    };
+  })();
+
   Polymer({
       is: 'mk-i18n-config',
       properties: {
