@@ -1,10 +1,10 @@
 mk-i18n
 =======
 
-`mk-i18n` is a polymer element wrapper for <a href="i18next.com">i18next</a> 
+`mk-i18n` is a polymer element wrapper for http://i18next.com 
 that displays text according to a language set in `mk-i18n-config` element.
 
-See <a href="#mk-i18n-config">mk-i18n-config</a> for more information about
+See <a href="/mk-i18n-config.html">mk-i18n-config</a> for more information about
 `mk-i18n-config` and locales folder structure.
 
 It  library in order to retrieve languages.
