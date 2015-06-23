@@ -46,10 +46,11 @@ Will display "Hola" inside a paragraph.
      */
     _refresh : function() {
     	var message = Polymer.mki18n.get(this.key);
-    	this.innerText = message || this.fallback;
+    	this.innerText = message || this.innerText;
     },
     
     ready: function() {
+      this._refresh();
     	Polymer.mki18n.addObserver(this);
     }
   });
